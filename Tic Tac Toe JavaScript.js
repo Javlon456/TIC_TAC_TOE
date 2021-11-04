@@ -31,6 +31,20 @@ function checkWinnerO() {
     }        
 }
 
+function clear(){
+    $(".box").empty();
+    $(".X").removeClass("X");
+    $(".O").removeClass("O");
+}
+
+function checkTie(){
+    if($(".X").length + $(".O").length === 9){
+    tie++
+    $("#tie").text(tie)
+    clear();
+}
+}
+
 $(".box").click(function(){
     if (turn === 1){
         $(this).text("X")
@@ -40,7 +54,9 @@ $(".box").click(function(){
         if(checkWinnerX()) {
             p1Score++
             $("#p1-score").text(p1Score)
+            clear();
         }
+        checkTie();
     }
     else {
         $(this).text("O")
@@ -50,6 +66,8 @@ $(".box").click(function(){
         if(checkWinnerO()) {
             p2Score++
             $("#p2-score").text(p2Score)
+            clear();
         }
+        checkTie();
     }
 })
